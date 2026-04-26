@@ -1,0 +1,145 @@
+This chapter is freely inspired by the work of Bonneau, Faraut and Valent~\cite{Bonneau_2001}.
+In physics, self-adjoint operators are
+fundamental because they ensure that the associated observables have real
+eigenvalues, and real eigenvalues are essential for physical interpretations of
+measurements.
+
+Most of our experience and intuition is predicated on the self-adjointness of the operators, and when this fails, the intelligibility of the theory goes with it.
+
+Not all operators in quantum mechanics are self-adjoint by default, it may
+depend on the operator itself or its considered domain.\footnote{For example,
+    the momentum operator in one dimension is not self-adjoint on its maximum
+    domain because its domain is not the entire Hilbert space, \textit{i.e. it's unbounded}.}
+
+The method of self-adjoint extension provides a systematic approach to extend
+or restrict the domain of a non-self-adjoint operator to make it self-adjoint.
+
+The process we are about to describe can be summarized as follows: we begin with a symmetric operator $(A,\mathcal{D}(A))$ and gradually extend $\mathcal{D}(A)$ while simultaneously narrowing down $\mathcal{D}({A^\dagger})$ until the two domains become identical. This procedure gives rise to a set of important questions, which were initially tackled by Weyl and subsequently extended by von Neumann and Stone: 
+
+How can one determine if a given operator allows for a self-adjoint extension? 
+
+Is the extension, if it exists, unique? 
+
+How is the self-adjoint domain constructed?
+
+
+\vspace{4mm}
+\noindent
+This \textit{Mathematical Tool} chapter aims to answer those questions, but before we can delve into the essence of the method, we need some definitions.
+
+\paragraph{Definition} Let us consider a Hilbert space $\mathcal{H}$. An operator $(A, \mathcal{D}(A))$ defined
+on $\mathcal{H}$ is said to be densely defined if the subset $\mathcal{D}(A)$ is dense in
+$\mathcal{H}$, meaning that for any $\psi \in \mathcal{H}$, one can find a sequence $\varphi_n$ in
+$\mathcal{D}(A)$ that converges in norm to $\psi$.
+
+\paragraph{Definition} An operator $(A, \mathcal{D}(A))$ is said to be closed if there exists a
+sequence $\varphi_n$ in $\mathcal{D}(A)$ such that
+\[
+    \lim_{n \to \infty} \varphi_n = \varphi, \quad \lim_{n \to \infty} A\varphi_n = \psi,
+\]
+then it follows that $\varphi \in \mathcal{D}(A)$ and $A\varphi = \psi$.
+
+Fortunately all the operators that we use in the rest of the essay are dense and closed, so we shouldn't worry about those conditions.
+
+\paragraph{Definition} The adjoint operator of a (generally unbounded) operator $H$ with a dense
+domain $\mathcal{D}(H)$ is defined as follows. The domain
+$\mathcal{D}(H^\dagger)$ is the space of functions $\psi$ such that the linear
+form
+\[
+    \varphi \mapsto \langle \psi| H\varphi \rangle
+\]
+is continuous with respect to the norm of $H$. This implies the existence of
+$\psi^\dagger \in H$ such that
+\[
+    \langle\psi| H\varphi \rangle = \langle\psi^\dagger| \varphi \rangle .
+\]
+Hence, $H^\dagger\psi = \psi^\dagger$. Notably, the adjoint of any densely
+defined operator is closed.
+
+\paragraph{Definition} An operator $(H, \mathcal{D}(H))$ is said to be symmetric if for all $\varphi,
+    \psi \in \mathcal{D}(H)$, we have
+\[
+    \langle H\varphi| \psi \rangle = \langle \varphi| H\psi \rangle.
+\]
+If $\mathcal{D}(H)$ is dense, this is equivalent to saying that $(H^\dagger,
+    \mathcal{D}(H))$ is an extension of $(H, \mathcal{D}(H))$.
+
+\paragraph{Definition} The operator $H$ with dense domain $\mathcal{D}(H)$ is considered self-adjoint
+if $\mathcal{D}(H^\dagger) = \mathcal{D}(H)$ and $H^\dagger = H$.
+
+\clearpage
+
+\subsection{The Deficiency Indices}
+
+In this section, we assume that $(A, \mathcal{D}(A))$ is densely defined,
+symmetric, and closed, and let $(A^\dagger, \mathcal{D}(A^\dagger))$ be its
+adjoint.
+
+We define the deficiency subspaces $\mathcal{N}^+$ and $\mathcal{N}^-$ as
+follows:
+\[
+    \mathcal{N}^+ = \{\psi \in \mathcal{D}(A^\dagger), \quad A^\dagger\psi = z^+\psi, \quad \text{ Im } z^+ > 0\},
+\]
+\[
+    \mathcal{N}^- = \{\psi \in \mathcal{D}(A^\dagger), \quad A^\dagger\psi = z^-\psi, \quad \text{ Im } z^- < 0\},
+\]
+
+with respective dimensions $n^+$ and $n^-$. These are referred to as the
+deficiency indices of the operator $A$ and will be denoted by the ordered pair
+$(n^+, n^-)$.
+
+Importantly, $n^+$ (or $n^-$) is independent of the choice of $z^+$ (or $z^-$)
+as long as it lies in the upper (or lower) half-plane. Consequently, one simple
+way to determine $(n^+, n^-)$ is to take $z^+ = i\eta$ and $z^- = -i\eta$
+with an arbitrary strictly positive constant $\eta$ for dimensional reasons.
+
+\vspace{4mm}
+\noindent
+The following theorem, by Weyl and von Neumann, is of primary importance.
+
+\subsubsection*{Theorem:}
+
+For an operator $A$ with deficiency indices $(n^+, n^-)$, there are three possibilities:
+\begin{enumerate}
+    \item If $n^+ = n^- = 0$, then $A$ is self-adjoint (in fact, this is a necessary and
+          sufficient condition).
+    \item If $n^+ = n^- = n \geq 1$, then $A$ has infinitely many self-adjoint
+          extensions, parametrized by a unitary $n \times n$ matrix (\textit{i.e. $n^2$ real parameters}).
+    \item If $n^+ \neq n^-$, then $A$ has no self-adjoint extension.
+\end{enumerate}
+
+\noindent
+The application of this theorem to differential operators requires substantial
+work. Even if we start with an operator $P$ that is formally self-adjoint, this
+does not guarantee that $P$ is truly self-adjoint because the domains
+$\mathcal{D}(P)$ and $\mathcal{D}(P^\dagger)$ will generally be different.
+
+For a given differential operator $P$, three problems need to be solved:
+\begin{enumerate}
+    \item Find a domain $\mathcal{D}(P)$ for which the formally self-adjoint operator $P$
+          is symmetric and closed.
+    \item Compute its adjoint $(P^\dagger, \mathcal{D}(P^\dagger))$ and determine the
+          deficiency indices of $P^\dagger$.
+    \item When they do exist, describe the domains of all the self-adjoint extensions.
+\end{enumerate}
+
+\vspace{4mm}
+\noindent
+In this section, we have briefly described the process to understand the existence, the uniqueness and the dimension of the space of self-adjoint extensions.
+
+\subsection{The Boundary Conditions}
+
+Now we need to provide a method to compute boundary conditions that make our operator $H$ self-adjoint.
+
+For simplicity we assume that the deficiency indices are $n_+ = n_- = 1$, \textit{i.e. $(1,1)$}. Then we expect to find $\phi_+$ and $\phi_-$ as eigenfunction with respect to the two imaginary eigenvalues, \textit{i.e. two generators of the subspaces $ \mathcal{N}_\pm $}.
+
+We also know that the unitary matrix that relates the two one dimensional subspaces $ \mathcal{N}_\pm $ is one-dimensional, \textit{i.e. a complex number of modulus one}. Hence, the self-adjoint extensions depend on one parameter only.
+
+We set $U = \lambda$ with $|\lambda| = 1$, and define $\Phi_\lambda = \phi_+ + \lambda \phi_-$. The prescription for obtaining the boundary conditions is simply to require that:
+\begin{align} 
+    \label{eq:boundary_condition}
+    \langle H \Phi_\lambda | \psi \rangle = \langle \Phi_\lambda | H \psi \rangle
+\end{align}
+
+\noindent
+All and only the $\psi$ that satisfy this condition are in the domain of the $\lambda$-self-adjoint extension of the operator $H$, \textit{i.e. $(H,\mathcal{D}_\lambda(H))$}.

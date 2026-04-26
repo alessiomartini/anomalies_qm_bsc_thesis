@@ -1,0 +1,71 @@
+In this section, freely inspired by the work of Landau and Lifshitz~\cite{landau1991quantum}, we provide a summary of the analysis of the Schrödinger equation for different cases corresponding to the functional form of a singular potential at the origin. This section aims to justify why we are choosing the particular $-1/x^2$ potential, and further reasons will be discussed during its analysis. 
+
+We consider the time-independent Schrödinger equation which is given as follows:
+
+\begin{equation*}
+    \left(- \frac{\hbar^2}{2m}\nabla^2 + V(x) \right) \psi = E \psi
+\end{equation*}
+
+\subsection*{General Conditions}
+Solutions of the Schrödinger equation must satisfy certain general conditions. The wave function \(\psi(x, t)\) should be continuous throughout all space, even when the potential \(V(x)\) has discontinuities. However, it's essential to note that the continuity of derivatives is not maintained if there exists a surface beyond which the potential energy \(V\) becomes infinite (\(V = \infty\)). In such cases, the wave function \(\psi\) must be zero throughout this region, and the derivatives of \(\psi\) may be discontinuous.
+
+\clearpage
+
+\subsection*{Potential Function}
+The potential function \(V(x)\) is assumed to have the form:
+
+\begin{equation*}
+    V(x) = -\frac{a}{x^s}, \quad s \in \mathbb{R}, \quad a > 0.
+\end{equation*}
+
+\noindent
+Let's now analyze what happens for different values of $s$.
+
+\subsubsection{Case: \(s < 0\)}
+In this case, the potential is neither singular nor attractive, and there are no issues with the wave function.
+
+\subsection*{Short-Distance Behavior}
+
+For a generic value of \(s\), a wave function that remains finite in a small region (with radius \(r_0\)) around the origin and is zero outside this region leads to uncertainty in the particle's coordinates on the order of \(\hbar/r_0\). The uncertainty in momentum is on the order of \(1/r_0\). The mean values of kinetic and potential energy are given by:
+
+\begin{equation*}
+    \langle K \rangle \approx \frac{\hbar^2}{2 m r_0^2} \quad \text{and} \quad \langle V \rangle \approx -\frac{a}{r_0^s}
+\end{equation*}
+
+\noindent
+This provides an expression for the total energy:
+
+\begin{equation*}
+    \langle E \rangle \approx \frac{\hbar^2}{2 m r_0^2} - \frac{a}{r_0^s}
+\end{equation*}
+
+\subsubsection{Case: \(s > 2\)}
+The total energy becomes arbitrarily negative for sufficiently small \(r_0\), \textit{i.e. \( \langle E \rangle \to -\infty\)}. This implies the existence of stationary states with negative energy levels of arbitrarily large absolute values. The particle's motion in a small region near the origin corresponds to energy levels with large absolute values, and the \textit{ground state} is when the particle is at the origin, resembling a \textit{fall} to \(r = 0\).
+
+\subsubsection{Case: \(s < 2\)}
+The energy cannot take arbitrarily large negative values; in fact, \( \langle E \rangle \to +\infty\). The discrete spectrum begins at a finite negative value, indicating that the particle does not fall to the center.
+
+Unlike classical mechanics, where a particle's fall to the center is theoretically possible in any attractive field, quantum mechanics imposes limitations.
+
+\subsection*{Large-Distance Behavior}
+The nature of the energy spectrum is influenced by the behavior of the field at large distances. As \(r\) approaches infinity, the negative potential energy tends to zero. For a wave packet \textit{filling} a spherical shell of large radius \(r_0\) and thickness \(\Delta r\), where \(\Delta r\) is much less than \(r_0\), the order of magnitude of kinetic energy is \(\hbar^2/2 m \Delta r^2\), and the one of the potential energy is \(-a/r_0^s\).
+
+This results in the formula for the average energy:
+
+\begin{equation*}
+    \langle E \rangle \approx \frac{\hbar^2}{2 m \Delta r^2} - \frac{a}{r_0^s}
+\end{equation*}
+
+\noindent
+Then, if we consider the limit as $r_0$ approaches infinity and constrain $\Delta r$ to grow proportionally to it, we are led to differentiate again with respect to the values of $s$.
+
+\subsubsection{Case: \(s < 2\)}
+The total energy can become negative for sufficiently large \(r_0\), leading to stationary states with negative energy; in fact, \( \langle E \rangle \to 0^-\). This allows the particle to be found at large distances from the origin with a fair probability, implying that there are levels of arbitrarily small negative energy, and the discrete spectrum includes an infinite number of levels, denser toward \(E = 0\).
+
+\subsubsection{Case: \(s > 2\)}
+There are no levels of arbitrarily small negative energy; in fact, \( \langle E \rangle \rightarrow 0^+\). The discrete spectrum terminates at a level with a non-zero absolute value, resulting in a finite total number of levels.
+
+%\clearpage
+
+\subsection*{Conclusion}
+The analysis of the Schrödinger equation for different values of \(s\) reveals a variety of behaviors. The case \(s = 2\) is a special limit case that separates unstable bound states (\(s > 2\)) from stable ones (\(s < 2\)).

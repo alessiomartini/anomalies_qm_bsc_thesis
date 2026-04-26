@@ -1,0 +1,81 @@
+The literature on anomalies in quantum mechanics often focuses on two particular situations: the $1/x^2$ potential and the 2-dimensional $\delta$ potential. In this section, we aim to demonstrate that these two problems share some common peculiarities, particularly their scale invariance, which leads to similar discussions.
+
+\vspace{4mm}
+\noindent
+The Hamiltonian for this problem is: 
+\begin{align*}
+    H = - \frac{\partial^2}{\partial x^2} - \frac{\partial^2}{\partial y^2} - \delta(x) \delta(y)
+\end{align*}
+
+\subsubsection*{The Scale Invariance Symmetry}
+
+Just as with the other potential, let's assume we've found a bound state $\psi(x,y)$ (\textit{i.e. $E < 0$}), which satisfies the equation:
+\begin{align*}
+    \left(- \frac{\partial^2}{\partial x^2} - \frac{\partial^2}{\partial y^2} - \delta(x) \delta(y)\right)\psi(x,y) = E\psi(x,y)
+\end{align*}
+
+\clearpage
+
+\noindent
+If we scale the variables $x$ and $y$ at the same time by a factor of $\beta$, we can easily construct a new solution, $\psi_\beta(x,y) := \psi(\beta x, \beta y)$, with energy $\beta^2 E$:
+\begin{align*}
+     H \psi_\beta (x,y)
+     & = - \frac{\partial^2}{\partial x^2}\psi_\beta(x,y) - \frac{\partial^2}{\partial y^2}\psi_\beta(x,y) - \delta(x) \delta(y)\psi_\beta(x,y) \\
+     & = - \frac{\partial^2}{\partial x^2}\psi(\beta x, \beta y) - \frac{\partial^2}{\partial y^2}\psi(\beta x, \beta y) - \delta(x) \delta(y)\psi(\beta x, \beta y) \\
+     & = - \beta^2 \frac{\partial^2}{\partial (\beta x)^2}\psi(\beta x, \beta y) - \beta^2 \frac{\partial^2}{\partial (\beta y)^2}\psi(\beta x, \beta y) - \beta^2 \delta(\beta x) \delta(\beta y)\psi(\beta x, \beta y) \\
+     & = - \beta^2 \left(\frac{\partial^2}{\partial (\beta x)^2} - \frac{\partial^2}{\partial (\beta y)^2} -  \delta(\beta x) \delta(\beta y)\right)\psi(\beta x, \beta y) \\
+     & = \beta^2 E \, \psi_\beta (x)
+\end{align*}
+Because the transformation law of the $\delta$-function produces a $\beta$ factor for each dimension in the change of variable.
+
+This computation confirms the scale invariance of the problem.
+
+\subsubsection*{The Connection}
+
+Now, we want to demonstrate that the $\delta$ potential problem can be viewed as a particular case of the $-\alpha/x^2$ potential problem.~\cite{Araujo_10.1119/1.1624111}
+
+\vspace{4mm}
+\noindent
+Examine the radial component of the Hamiltonian operator for a free particle in the plane with the origin excluded:
+
+\begin{equation*}
+    H = - \frac{1}{r} \frac{d}{dr} \left( r \frac{d}{dr} \right)
+\end{equation*}
+
+\noindent
+By using the unitary transformation parametrized by $s$:
+
+\begin{align*}
+    U_s: \mathcal{L}^2([0, \infty); r^{-2s} dr) & \to \mathcal{L}^2([0, \infty); dr) \\
+    (Uf)(r)                                   & = r^s f(r)
+\end{align*}
+
+\noindent
+The action of the operator becomes:
+
+\begin{align*}
+    - \frac{1}{r} \frac{d}{dr} \left(r \frac{d}{dr} \right) r^s f
+     & = \left( \frac{d^2}{dr^2} + \frac{1}{r} \frac{d}{dr} \right) r^s f \\
+     & =  r^s \left( \frac{s(s-1)}{r^2} f + \frac{2s}{r} f' + f'' \right) +  r^s \left( \frac{1}{r} f' + \frac{s}{r^2} f \right) \\
+     & = r^s \left(  \frac{1}{r^2} s^2 f + \frac{1}{r} (2s+1) f' + f''  \right)
+\end{align*}
+
+\noindent
+To remove the first derivative term and obtain what we want, we set $s = -1/2$. 
+
+Hence our specific operator is
+
+\begin{align*}
+    U_{-1/2}: \mathcal{L}^2([0, \infty); r dr) & \to \mathcal{L}^2([0, \infty); dr) \\
+    (Uf)(r)                                   & = \frac{1}{\sqrt{r}} f(r)
+\end{align*}
+
+\noindent
+The overall factor $r^{-1/2}$ is eliminated by the action of $U_{-1/2}^\dagger$, so the action of the Hamiltonian becomes:
+
+\begin{equation*}
+    H' = U_{-1/2}^\dagger \, H \, U_{-1/2} = - \frac{d^2}{dr^2} - \frac{1}{4r^2}
+\end{equation*}
+
+\noindent
+The problem of the $\delta$ potential is revealed to be a specific self-adjoint extension of the free particle in the plane with the origin removed~\cite{Jackiw:216395}. Therefore, for states with circular symmetry, implying the angular wave function is in its ground state, the two-dimensional $\delta$ function problem is mathematically equivalent to the $-\alpha/x^2$ potential, where $\alpha = 1/4$.

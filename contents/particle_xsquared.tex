@@ -1,0 +1,369 @@
+This Section is freely inspired by the work of Essin and Griffiths~\cite{EssinGriffiths:10.1119/1.2165248}.
+
+In Section~\ref{section:generic_potentials} of this essay, we have demonstrated why the $-a/x^2$ potential differs from other potentials. In the introductory discussion in Section~\ref{section:peculiarities}, we discovered that it cannot possess a ground state because of its scale invariance. By the end of this section, it will become evident that the conclusion we reached is inconsistent with the results of the correct approach to the problem presented in this section.
+
+\vspace{4mm}
+\noindent
+Now it is time to use the mathematical tool that we've developed in Section~\ref{section:self_adjoint}: \textit{The self-adjoint extension}, to understand all of its subtleties.
+
+\vspace{4mm}
+\noindent
+The fundamental problem with the $1/x^2$ potential is that the Hamiltonian correlated with our initial \textit{naive} boundary conditions
+\begin{equation}
+    H =  \frac{\hbar^2}{2m} \left(-\frac{d^2}{dx^2} - \frac{\alpha}{x^2}\right), \quad \lim_{x \to 0} \psi(0) = 0
+    \label{eq:naive_BC}
+\end{equation}
+
+is not self-adjoint.\footnote{Remember that $\alpha := 2ma/\hbar^2$.}
+
+\vspace{4mm}
+\noindent
+Let's first show a computation, given $f(x),g(x) \in \mathcal{L}(0,\infty)$:
+
+\begin{align}
+    \begin{split}
+        \langle f | H g \rangle - \langle H f |  g \rangle
+         & = \frac{\hbar^2}{2m} \left(\langle f | (- \frac{d^2}{dx^2} - \frac{\alpha}{x^2}) g \rangle - \langle (- \frac{d^2}{dx^2} - \frac{\alpha}{x^2}) f |  g \rangle\right)                                         \\
+         & =  \frac{\hbar^2}{2m} \left(- \int_0^\infty f^* (g''+ \frac{\alpha}{x^2}g) + \int_0^\infty \overline{(f'' + \frac{\alpha}{x^2}f)} g\right)   \\
+         & =  \frac{\hbar^2}{2m} \left(- (f^* g')\bigg|_0^\infty + \int_0^\infty f'^* (- g' + \frac{\alpha}{x^2}g) + \int_0^\infty \overline{(f'' + \frac{\alpha}{x^2}f)}\right)                          \\
+         & = \frac{\hbar^2}{2m} \left(- (f^* g')\bigg|_0^\infty + (f'^* g)\bigg|_0^\infty - \int_0^\infty f''^* ( g + \frac{\alpha}{x^2}g) + \int_0^\infty \overline{(f'' + \frac{\alpha}{x^2}f)}\right) \\
+         & =  \frac{\hbar^2}{2m} \left((- f^* g' + f'^* g)\bigg|_0^\infty - \int_0^\infty \overline{(f''  + \frac{\alpha^*}{x^2}f)}g + \int_0^\infty \overline{(f'' + \frac{\alpha}{x^2}f)}\right) \\
+         & = \frac{\hbar^2}{2m} \left((- f^* g' + f'^* g)\bigg|_0^\infty\right)
+    \end{split}
+    \label{eq:potential_symmetry}
+\end{align}
+The last identity is true because $\alpha$ is real.
+
+\noindent
+We know that for every $f$ and $g$ in $\mathcal{L}(0,\infty)$, at infinity there's no problem since the terms vanish automatically because of the normalization, but the term valued at the origin is more subtle.
+
+We  can easily see that if both $f(x)$ and $g(x)$ respect the boundary condition given by Eq.~\eqref{eq:naive_BC}, then the zero boundary term does not always vanish, since we know that the derivatives can diverge.
+In fact, we have shown using the Frobenius method in Section~\ref{section:peculiarities} that the solutions near the origin behave like $x^s$, where $s_\pm = 1/2 \pm \sqrt{1/4 - \alpha}$.
+
+Injecting the founded functional forms in the boundary condition multiplied by $2m/\hbar^2$, we are lead to differentiate for different values of $\alpha$:
+\subsubsection*{If $\alpha < 1/4$:} 
+Being $f(x) = x^{s_+}$ and $g(x) = x^{s_-}$
+\begin{align*}
+    (- f^* g' + f'^* g)\bigg|_0
+     & = - \overline{x^{s_+}} s_- x^{s_- -1} + \overline{s_+ x^{s_+-1}} x^{s_-} \\
+     & = x^{s_+^* + s_- -1}(- s_- + s_+^*)                                      \\
+     & = 2 \sqrt{1/4 - \alpha}
+\end{align*}
+
+\subsubsection*{If $\alpha > 1/4$:}
+ Being $f(x) = x^{s_+}$ and $g(x) = x^{s_+}$
+\begin{align*}
+    (- f^* g' + f'^* g)\bigg|_0
+     & = - \overline{x^{s_+}} s_+ x^{s_+ -1} + \overline{s_+ x^{s_+-1}} x^{s_+} \\
+     & = x^{s_+^* + s_+ -1}(- s_+ + s_+^*)                                      \\
+     & = 2i \sqrt{\alpha-1/4}
+\end{align*}
+
+\vspace{4mm}
+\noindent
+So we can conclude that unless $\alpha = 1/4$, which is a special limit case we have already encountered and will be discussed separately at the end of this Section and in Section~\ref{section:delta_potential}, a different condition needs to be imposed.
+
+\vspace{4mm}
+\noindent
+Suppose we require that permissible functions vanish within a finite (albeit extremely small) vicinity of the origin. In such a scenario, the boundary term disappears trivially, and $H$ becomes symmetric within this specific domain. However, if $g(x)$ adheres to this highly constrained domain, $f(x)$ could be any square-integrable function, and the boundary term would still vanish. Consequently, the domain of the adjoint is considerably more extensive than the one of the operator, and, as a result, $H$ does not qualify as self-adjoint.
+
+\subsection{The Self-adjoint Extensions}
+
+Let us apply, recalling the procedure followed in Section~\ref{section:free_halfaxis}, the analysis to the Hamiltonian operator
+\begin{align*}
+    H = \frac{\hbar^2}{2m} \left(-\frac{d^2}{dx^2} - \frac{\alpha}{x^2}\right),
+\end{align*}
+
+
+on the positive semi-axis, where, anticipating the result, we'll find out that there are infinitely many self-adjoint extensions parametrized by $U(1)$, \textit{i.e. a phase}.
+
+\subsubsection*{The Deficiency Indices}
+
+Let us consider the Hilbert space $\mathcal{H} = \mathcal{L}^2(0, \infty)$, and to use von Neumann's theorem, we have to determine the functions $\phi_{\pm}(x)$ given by
+\begin{equation} \label{eq:potential_H}
+    H^\dagger \phi_{\pm}(x) = \frac{\hbar^2}{2m} (-\frac{d^2}{dx^2} - \frac{\alpha}{x^2}) \phi_{\pm}(x) = \pm \frac{\hbar^2}{2m} ik^2_0 \phi_{\pm}(x), \quad k_0 > 0
+\end{equation}
+
+\noindent
+The mathematical literature~\cite{garfken67:math} give us the following result, which is the general solution of the differential equation
+\begin{equation*}
+    \phi_{\pm} = \sqrt{x}\left(A_\pm H_{ig}^{(1)}(ik_\pm x) + B_\pm H_{ig}^{(2)}(ik_\pm x)\right), \quad k_{\pm} = e^{\mp i \pi/4} k_0
+\end{equation*}
+
+where $g := \sqrt{\alpha - 1/4}$, $A_\pm$ and $B_\pm$ are arbitrary constants and $H^{(1)}$, $H^{(2)}$ are Hankel functions.
+However, $H_{ig}^{(2)}(x)$ is not in $\mathcal{L}^2(0,\infty)$ (and hence not in $\mathcal{D}({H^\dagger})$) because it diverges exponentially. Thus,
+\begin{align*}
+    \phi_\pm(x) = A_\pm \sqrt{x} H_{ig}^{(1)}(ik_\pm x)
+\end{align*}
+
+where now $A_\pm$ are simply the normalization constants.
+
+\noindent
+This leads to deficiency indices \((1, 1)\), resulting in infinitely many self-adjoint extensions parametrized by \(U(1)\), such that $U = \lambda$ with $|\lambda| = 1$ complex, as we anticipated.
+
+\subsubsection*{The Boundary Conditions}
+
+To determine the space in which $H$ is self-adjoint, we need to find the $\psi$ that satisfy Eq.~\eqref{eq:boundary_condition}. By defining $\Phi_\lambda = \phi_+ + \lambda \phi_-$ (notice the dimensionless nature of $\lambda$), we require the following to be zero:
+\begin{align*}
+    \langle \Phi_\lambda | H \phi \rangle - \langle H \Phi_\lambda |  \phi \rangle
+\end{align*}
+
+\noindent
+So substituting $\Phi_\lambda$ and $\psi$ in Eq.~\eqref{eq:potential_symmetry}, we obtain the condition:
+\begin{align}
+    \lim_{x \to 0}\left(\Phi_\lambda^*(x)\frac{d\psi}{dx} - \frac{d\Phi_\lambda^*}{dx}\psi(x)\right) = 0
+    \label{eq:potential_bound_explicit}
+\end{align}
+
+\noindent
+Evidently, we need to understand the behavior of $\phi_\pm$ for small $x$, which requires knowing the behavior of $H_{ig}^{(1)}(x)$. This forces us to split the discussion into different values of $g$.
+
+\subsubsection{Case: \(g \neq 0\)}
+Remember that $g \neq 0$ means $\alpha \neq 1/4$.
+
+For a generic non zero value of $g$, the Hankel function $H_{ig}^{(1)}(x)$ behaves near the origin as~\cite{gradshteyn2007}
+\begin{equation}
+    H_{ig}^{(1)}(ik_\pm x) \approx e^{ig \ln(ik_\pm x/2)}\frac{1 + \coth(\pi g)}{\Gamma(1+ig)} - e^{-ig \ln(ik_\pm x/2)}\frac{\Gamma(1+ig)}{\pi g},
+    \label{eq:generig_hankel}
+\end{equation}
+
+\noindent
+But remembering that $k_\pm = e^{\mp i\pi/4} k_0$,
+\begin{equation*}
+    \ln(\frac{ik_\pm x}{2}) = \ln(k_0 x)-\ln(2)+ \frac{i l_\pm \pi}{4}
+\end{equation*}
+
+where we defined for clarity $l_+ := 1$ and $l_- := 3$.
+
+\noindent
+Using this result follow directly that
+\begin{equation*}
+    e^{ig \ln(ik_\pm x/2)} = e^{ig \ln(k_0 x)}e^{-ig\ln(2)}e^{-g l_\pm \pi/4}
+\end{equation*}
+
+\noindent
+So we can finally show the functional form of $\phi_\pm$ near the origin:
+\begin{align*}
+    \phi_+ & \approx \sqrt{x}\left(  D e^{ig \ln(k_0 x)} - F e^{-ig \ln(k_0 x)} \right)                            \\
+    \phi_- & \approx \sqrt{x}\left(  D e^{ig \ln(k_0 x)} e^{-\pi g /2} - F e^{-ig \ln(k_0 x)} e^{\pi g /2} \right)
+\end{align*}
+
+where we have defined the constants $D$ and $F$ that depend only from $g$ (\textit{i.e. $\alpha$}) as follow
+\begin{align*}
+    D & := e^{-ig \ln(2)}e^{-\pi g/4}\left( \frac{1 + \coth(\pi g)}{\Gamma(1+ig)}\right) \\
+    F & := e^{ig \ln(2)}e^{\pi g/4}\left( \frac{\Gamma(1+ig)}{\pi g}\right)
+\end{align*}
+
+\noindent
+We have now all the tools to reassemble $\Phi_\lambda$ and compute its derivative, obtaining their behavior near the origin:
+\begin{align}
+    \Phi_\lambda             & \approx \sqrt{x} \left( G e^{ig \ln(k_0 x)} - J e^{-ig \ln(k_0 x)} \right)                                           \\
+    \frac{d\Phi_\lambda}{dx} & \approx \frac{1}{\sqrt{x}} \left( G \frac{1+2ig}{2} e^{ig \ln(k_0 x)} - J \frac{1-2ig}{2} e^{-ig \ln(k_0 x)} \right)
+    \label{eq:potential_Phi_deriv}
+\end{align}
+
+where we have again defined the new parameters $G$ and $F$ which depend on $\lambda$ and $g$, as
+
+\begin{align*}
+    G & := D \, (A_+ +\lambda A_- e^{-\pi g/2}) \\
+    J & := F \, (A_+ +\lambda A_- e^{\pi g/2})
+\end{align*}
+
+\noindent
+Now that we have unraveled the behavior of $\Phi_\lambda$ around the origin, we can come back to the problem of defining the boundary condition of each self-adjoint extension. So using Eq.~\eqref{eq:potential_Phi_deriv} and the general condition reported in Eq.~\eqref{eq:boundary_condition} expressed as in Eq.~\eqref{eq:potential_bound_explicit} (actually we're using its complex conjugate), we obtain the following:
+\begin{align}
+    \lim_{x \to 0} \sqrt{x}(e^{2ig \ln(x/x_0)} -1 ) \frac{d\psi^*}{dx} - \frac{1}{\sqrt{x}}\left(\frac{1+2ig}{2} e^{2ig \ln(x/x_0)} - \frac{1-2ig}{2} \right) \psi^* = 0
+    \label{eq:final_BC}
+\end{align}
+Where we have introduced a new parameter $x_0$ that is characteristic of the self-adjoint extension; it has incorporated all the parameters defined earlier, so it is $\lambda$ and $\alpha$ dependent. It is defined as followed
+\begin{align*}
+    x_0 := \frac{1}{k_0} \left( \frac{G}{J} \right)^{i/2g}.
+\end{align*}
+
+\subsubsection*{The anomaly in the boundary conditions}
+
+We computed the boundary conditions that render our operator $H$ self-adjoint (\textit{i.e. $\mathcal{D}_\lambda(H) = \mathcal{D}_\lambda(H^\dagger)$}).
+
+The process has necessitated the introduction of a new dimensionless parameter, $\lambda$. However, the calculations have brought about the appearance of $x_0$, which possesses the dimensions of length. This phenomenon breaks the symmetry of our problem, making it no longer scale-invariant.
+\footnote{The process that has just happened is an example of dimensional transmutation.}
+
+\vspace{4mm}
+\noindent
+The thing that has just happened is the anomalous symmetry breaking and we'll talk again about it at the end of the Section.
+
+\subsubsection*{In comparison to the free particle}
+
+We can easily check if the result obtained does accord with the one obtained for the free particle in the half-axis in Section~\ref{section:free_halfaxis}.
+In fact taking $\alpha = 0$ (so $g=i/2$) means no potential, and the boundary condition expressed in Eq.~\eqref{eq:final_BC} reduces to:
+\begin{align*}
+    \lim_{x \to 0} \frac{x_0}{\sqrt{x}} \frac{d\psi^*}{dx} + \frac{1}{\sqrt{x}} \psi^* = 0
+\end{align*}
+
+\noindent
+Which impose that: the sum of $\psi$ and its derivative approach zero faster than $\sqrt{x}$, and the same condition we've obtained for the free particle discussion:
+\begin{align*}
+    x_0 \frac{d\psi}{dx}(0) + \psi(0) = 0.
+\end{align*}
+
+\subsubsection{Case: \(g = 0\)}
+Remember that $g = 0$ means $\alpha = 1/4$.
+
+In this situation the behavior near the origin of the Hankel function we used, Eq.~\eqref{eq:generig_hankel}, is no more correct, we need to replace it by~\cite{gradshteyn2007}
+
+\begin{align}
+    H_0^{(1)}(ik_\pm x) \approx 1 - \frac{l_\pm}{2} + \frac{2i}{\pi} \ln\left(\frac{\gamma k_0 x}{2}\right)\
+    \label{eq:hankel_g0}
+\end{align}
+
+where $\gamma$ is defined as $e^C$ where $C$ is the Euler's constant.
+
+\noindent
+Hence, we can express the elements of the deficiency spaces as:
+
+\begin{align*}
+    \phi_+ & \approx A_+ \sqrt{x} \left(+\frac{1}{2}+ \frac{2i}{\pi} \ln \left( \frac{\gamma k_0 x}{2} \right)  \right) \\
+    \phi_- & \approx A_- \sqrt{x} \left(-\frac{1}{2}+ \frac{2i}{\pi} \ln \left( \frac{\gamma k_0 x}{2} \right)  \right)
+\end{align*}
+
+\noindent
+So now we have everything to construct $\Phi_\lambda$ and its derivative, they turn out to be
+
+\begin{align*}
+    \Phi_\lambda             & \approx \sqrt{x} \left(G + J \ln\left(\frac{\gamma k_0 x}{2}\right)\right)                 \\
+    \frac{d\Phi_\lambda}{dx} & \approx \frac{1}{2\sqrt{x}} \left(G + 2J + J \ln\left(\frac{\gamma k_0 x}{2}\right)\right)
+\end{align*}
+
+\noindent
+We again have defined the variables $G$ and $J$ that are dependent from the self-adjoint extension as follow:
+\begin{align*}
+    G & := \frac{1}{2} (A_+ - \lambda A_-)    \\
+    J & := \frac{2i}{\pi} (A_+ + \lambda A_-)
+\end{align*}
+
+\noindent
+So the last thing to do is to inject those terms in Eq.~\eqref{eq:potential_bound_explicit}, to find the constrain that defines the domain $\mathcal{D}_\lambda(H)$, where $\psi$ lives, that makes $H$ self-adjoint. The boundary condition turns out to be
+
+\begin{align}
+    \lim_{x \to 0} \sqrt{x} \ln\left(\frac{x}{x_0}\right) \frac{d\psi}{dx} - \frac{1}{\sqrt{x}}\left(1+\frac{1}{2} \ln\left(\frac{x}{x_0}\right) \right) \psi =0
+    \label{eq:final_BC_g0}
+\end{align}
+
+where this time we have defined the dimensional parameter that characterizes the self-adjoint extension as follow
+\begin{align*}
+    x_0 := \frac{2}{\gamma k_0} e^{-G/J}
+\end{align*}
+
+\subsection*{The anomaly in the boundary condition}
+
+As we've briefly mentioned earlier for the case $g \neq 0$, we can say that the process that lead us from the non self-adjoint Hamiltonian operator (because of its boundary conditions) to the family of the self-adjoint ones, introduced a new parameter in the theory.
+This parameter, \textit{i.e. $x_0$}, is not dimensionless, indeed has the dimension of a length; it shows up in the new boundary conditions of the Hamiltonian,\textit{i.e. Eq.~\eqref{eq:final_BC} if $g\neq 0$ and Eq.~\eqref{eq:final_BC_g0} if $g=0$ ($\alpha=1/4$)}. So if we try to newly prove the scale invariance of the problem, since the boundary conditions are now not scale invariant, we'll surely fail.
+
+\vspace{4mm}
+\noindent
+What happened, in physics, is called \textit{anomalous symmetry breaking}, that is the breaking of a symmetry upon quantization.
+  
+\clearpage
+
+\subsection{The Bound States}
+
+So far, we've computed a continuous set of boundary conditions that define $\mathcal{D}_\lambda(H)$ such that $(H,\mathcal{D}_\lambda(H))$ is self-adjoint, but the selection of a specific extension, or in other words, a particular value for $x_0$, is arbitrary. Consequently, this implies the existence of an entire $U(1)$ one-parameter family of distinct physical theories associated with the $1/x^2$ potential.
+This fact raises the question: 
+
+Do these theories yield reasonable bound state spectra?
+
+\vspace{4mm}
+\noindent
+We know from Section~\ref{section:peculiarities} that if our problem admits negative energy states that are normalizable, \textit{i.e. bound states}, they should assume the following functional form
+\begin{align*}
+    \psi_\rho(\rho x) = A \sqrt{x} K_{ig}(\rho x), \quad A = \rho \sqrt{\frac{2 \sinh(\pi g)}{\pi g}}
+\end{align*}
+
+where $\rho^2 := - 2mE/\hbar^2$.
+
+\noindent
+Remembering that $K_{ig}$ is the modified Bessel function and knowing its relation with $H_{ig}^{(1)}$, the Hankel function:
+\begin{align*}
+    \psi_\rho(\rho x) = A \frac{i\pi}{2} \sqrt{x} H_{ig}(i \rho x), \quad A = \rho \sqrt{\frac{2 \sinh(\pi g)}{\pi g}}
+\end{align*}
+
+\noindent
+It's now normal to ask if for some self-adjoint extension, the presented bound state satisfy the boundary conditions, \textit{i.e. it is in the self-adjoint domain of $H$}.
+
+\vspace{4mm}
+\noindent
+To answer we're newly forced to split the discussion for different values of $g$.
+
+\subsubsection{Case: \(g = 0\)}
+
+Since the condition at infinity il already satisfied, we need to expand our function and its derivative in the neighborhood of the origin, from Eq.~\eqref{eq:hankel_g0} 
+\begin{align*}
+    \psi_\rho &\approx - A \sqrt{x} \ln{ \left( \frac{\gamma \rho x}{2} \right) } \\
+    \frac{d\psi_\rho}{dx} &\approx -A \frac{1}{\sqrt{x}} \left(1+\frac{1}{2}\ln{ \left( \frac{\gamma \rho x}{2} \right) }\right)
+\end{align*}
+
+\clearpage
+
+\noindent
+Imposing the boundary condition we've founded earlier: Eq.~\eqref{eq:final_BC_g0}, we obtain
+\begin{align*}
+    \lim_{x \to 0} A \ln(\frac{\gamma \rho x_0}{2}) = 0
+\end{align*}
+So the only solution is satisfied by $\gamma \rho x_0/2 = 1$, \textit{i.e. $\rho = 2/\gamma x_0$}.
+
+\vspace{4mm}
+\noindent
+What we've found is that for each self-adjoint extension there's a unique bound state, and its energy is dependent from the choice of the self-adjoint extension, so it cannot be calculated if we don't know what self-adjoint extension is the \textit{correct} one that describes our physical problem. 
+
+\vspace{4mm}
+\noindent
+Mathematically, the choice of a particular extension is arbitrary. However, in reality, our system is described by only one of these extensions. Thus, only a physical experiment, such as measuring the energy of the bound state, can determine the specific self-adjoint extension that describes it.
+\footnote{In fact, in some other self-adjoint extension problems that describe physical scenarios, we can eliminate certain self-adjoint extensions that do not align with the physical symmetries that the real problem should adhere to.}
+
+\subsubsection{Case: \(g \neq 0\)}
+
+Now, again we have to impose the self-adjoint boundary conditions on the wave function we know posses negative energy and see if some of them survives.
+
+Knowing the behavior of $K_{ig}$ and its derivative near the origin~\cite{garfken67:math}, reported as follow
+\begin{align*}
+    \psi_\rho             & \approx B \sqrt{x} \sin{\theta}                                                     \\
+    \frac{d\psi_\rho}{dx} & \approx B \frac{1}{\sqrt{x}} \left(\frac{1}{2} \sin{\theta} + g \cos(\theta)\right)
+\end{align*}
+
+where we have defined the parameter $B$ and the function $\theta(x)$ as
+\begin{align*}
+    B         & := -A\sqrt{\frac{\pi}{g \sinh(\pi g)}}      \\
+    \theta(x) & := g \ln{\left(\frac{\rho x}{2}\right)} - Arg[\Gamma(1+ig)]
+\end{align*}
+
+\clearpage
+
+\noindent
+Using now the boundary condition we've founded earlier: Eq.~\eqref{eq:final_BC}, we obtain:
+
+\noindent
+If $g$ is real, \textit{i.e. $\alpha > 1/4$}
+\begin{align*}
+    \rho = \frac{2}{x_0} \, e^{ \frac{Arg \left[\Gamma(1+ig)\right] - n \pi}{g}}, \quad n \in \mathbb{Z}
+\end{align*}
+
+that means an infinite set of unbounded discrete eigenvalues, \textit{i.e. no ground state}.
+
+\noindent
+If $g$ is imaginary, \textit{i.e. $\alpha < 1/4$}
+\begin{align*}
+    \rho = \frac{2}{x_0}
+\end{align*}
+
+that means an unique bound state for each self-adjoint extension.
+
+\vspace{4mm}
+\noindent
+The correctness of this result suggest us that when we showed that $\alpha < 1/4$ implies that no negative energy is allowed, in Section~\ref{section:peculiarities}, we've missed something, or more precisely, the problem we considered was described by a non self-adjoint Hamiltonian.
+
+\subsection*{The anomaly in the bound states}
+
+We have already discussed the anomaly that became evident when we identified the appropriate boundary conditions to make $H$ self-adjoint. Since scale invariance is broken, bound states are no longer forbidden; in fact, we have derived a reasonable expression for the spectrum.
+
+\vspace{4mm}
+\noindent
+As mentioned earlier, the energies obtained depend on $x_0$, making the spectrum measurement the sole method to determine the specific self-adjoint extension that describes our physical problem.
