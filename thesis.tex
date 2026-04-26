@@ -1,0 +1,445 @@
+\documentclass[a4paper,12pt,twoside]{report}
+
+%%% PACKAGES %%%
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage[variant=uk]{english} % change to your language
+%\setotherlanguage{czech} % if you need a specific part written in another language
+
+% hyphenation rules for specialized words
+
+%\AtBeginDocument{
+%\hyphenation{pho-ton quan-tum}
+%}
+
+\usepackage{fontspec}
+
+\usepackage[english=british]{csquotes}
+\usepackage[xetex]{graphicx}
+
+% see biblatex documentation
+\usepackage[sorting=none,style=phys,backend=biber,defernumbers=true]{biblatex}
+\usepackage[unicode]{hyperref}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{pdfpages}
+\usepackage{microtype}
+\usepackage{unicode-math}
+
+% needed for a specific command changing bibliography formatting
+\usepackage{xpatch}
+
+% Libertinus fonts
+\usepackage{libertinus-otf}
+
+
+\usepackage{comment}
+\usepackage{marginnote}
+\usepackage{sidenotes}
+
+\usepackage{lastpage}
+
+% Custom command to create margin notes with author, color, and text size
+\newcommand{\alenote}[1]{%
+    \sidenote{\tiny \textcolor{green}{\textbf{Alessio:}} #1}%
+}
+
+% Custom command to create margin notes with author, color, and text size
+\newcommand{\profnote}[1]{%
+    \sidenote{\tiny \textcolor{red}{\textbf{Prof:}} #1}%
+}
+
+
+% At the moment, STIX looks better than Libertinus Math, but that will hopefully change soon.
+% feel free to comment this out and try Libertinus Math
+\setmathfont{STIX2Math.otf}
+
+% metadata for the PDF file
+\hypersetup{
+pdfauthor={Alessio Martini},
+pdftitle={The Title of the Thesis},
+pdfsubject={Physics},
+pdfkeywords={symmetries, anomalies, quantum mechanics}
+}
+
+
+
+%%% BIBLIOGRAPHY %%%
+
+\addbibresource{bibliography.bib}
+
+
+% you may put the publications you authored in a separate category
+\DeclareBibliographyCategory{MyArticles}
+\addtocategory{MyArticles}{EssinGriffiths:10.1119/1.2165248}
+\addtocategory{MyArticles}{Bonneau_2001}
+
+
+% force the order you want by referencing them all here using \nocite
+
+\nocite{EssinGriffiths:10.1119/1.2165248}
+\nocite{Bonneau_2001}
+ 
+\nocite{landau1991quantum} 
+\nocite{garfken67:math}
+\nocite{gradshteyn2007}
+
+\nocite{Holstein:10.1119/1.4867052}
+\nocite{Jackiw:216395}
+\nocite{Coon_2002}
+
+%%% BIBLATEX OPTIONS AND TWEAKS %%%
+
+% Biblatex enables editing .bib entries and configuring everything in your LaTeX document
+
+% get rid of the months
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite]{
+      \step[fieldset=month, null]
+    }
+  }
+}
+
+
+% declare special bibliography contexts with optional prefixes
+\DeclareRefcontext{myarticles}{labelprefix=A}
+\DeclareRefcontext{books}{labelprefix=B}
+
+% change the typesetting of reference numbers in the bibliography
+
+\DeclareFieldFormat{labelnumberwidth}{#1\hspace{10pt}}
+
+% declare command \citenum that prints a plain reference number
+% can be used in a sentence
+
+\DeclareCiteCommand{\citenum}
+  {\printtext[bibhyperref]{\printfield{labelprefix}}}
+  {\printtext[bibhyperref]{\printfield{labelnumber}}}
+  {}
+  {}
+
+
+% produce clickable URL links for theses
+\letbibmacro{ORIG-institution+location+date}{institution+location+date}
+\renewbibmacro*{institution+location+date}
+{\iffieldundef{url}
+		{\usebibmacro{ORIG-institution+location+date}}
+		{\href{\thefield{url}}{\usebibmacro{ORIG-institution+location+date}}}
+}
+
+% small caps typesetting of author names
+\DeclareNameWrapperFormat{author}{\textsc{#1}}
+
+% make the 'and' between the last two authors upright and not small caps
+% taken from biblatex.def and modified
+\DeclareDelimFormat{finalnamedelim}{
+\textup{
+  \ifnumgreater{\value{liststop}}{2}{\finalandcomma}{}%
+  \addspace\bibstring{and}\space
+  }
+}
+
+
+% after the authors list, there is a colon and a newline
+\renewcommand{\labelnamepunct}{\addcolon\newline}
+
+% the newline between name and journal is tricky to add, because there is no command to redefine.
+% here is some black magic using the package xpatch
+% taken from https://tex.stackexchange.com/questions/351397/biblatex-add-line-breaks-after-author-and-title
+\makeatletter
+\def\do#1{
+  \ifcsdef{blx@bbx@#1}
+    {\xpatchbibdriver{#1}
+       {\printlist{language}%
+        \newunit\newblock}
+       {\printlist{language}%
+        \printunit{\addcomma\newline}}
+       {}{}}
+    {}}
+\abx@doentrytypes{}
+\makeatother
+
+
+% make the font size smaller for bibliography
+\renewcommand*{\bibfont}{\footnotesize}
+ 
+
+% if you don't like titles in quotes, this gets rid of them
+
+%\DeclareFieldFormat[article,inproceedings,patent,incollection]{title}{%
+%  \iftoggle{bbx:chaptertitle}
+%    {#1\isdot}
+%    {}%
+%}
+
+
+
+
+%%% PAGE HEADERS AND FOOTERS %%%
+
+% !!! the narrow margins are inner margins, while the wider margins are outer margins
+% odd-numbered pages  1,3,5,... right side >>> __text____
+% even-numbered pages 2,4,6,... left side  >>> ____text__
+% see https://en.wikipedia.org/wiki/Canons_of_page_construction
+
+% page layout and margins are left at default settings
+
+\pagestyle{fancy}
+
+
+% this is here only so LaTeX does not complain
+\setlength{\headheight}{15pt}
+
+% the aim here is to have section names in the headings on the inner side
+% the way I think this works is:
+% when evaluating the \section[shortName]{fullName} command in the text, there is a \sectionmark command inside.
+% calling \markboth like below changes the current heading to shortName
+% works the same for chapters, both commands are redefined to cover the cases where the chapter does not contain a section immediately
+% !!! asterisk commands and table of contents do not contain marks, so you need to do it manually (see the main text)
+\renewcommand{\chaptermark}[1]{\markboth{\normalfont\sffamily\textsc{#1}}{}}
+\renewcommand{\sectionmark}[1]{\markboth{\normalfont\sffamily\textsc{#1}}{}}
+
+% remove page numbers from the footer and put it into the header (outer side)
+\fancyfoot{}
+\fancyhf[HLE,HRO]{\thepage}
+
+% redefine plain style to be compatible with fancy (beginning of chapters)
+\fancypagestyle{plain}{ %
+  \fancyhf{} % remove everything
+  \renewcommand{\headrulewidth}{0pt} % remove lines as well
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+
+%%% MISCELLANEOUS %%%
+
+% hyperlinks are highlighted using colored text instead of colored boxes
+% !!! switch off for printing unless you want the color in print
+
+\hypersetup{
+    colorlinks,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black
+}
+
+% heading styles, sans serif
+
+\def\headingStyle{\sffamily}
+
+\titleformat*{\section}{\LARGE\headingStyle}
+\titleformat*{\subsection}{\Large\headingStyle}
+\titleformat*{\subsubsection}{\large\headingStyle}
+\titleformat{\chapter}[display]
+{\huge\headingStyle}{\chaptertitlename\ \thechapter}{20pt}{\Huge\headingStyle}
+
+% in case you like prefixes to distinguish tables and figures from other numbered references
+
+%\renewcommand{\thefigure}{F\arabic{chapter}.\arabic{figure}}
+%\renewcommand{\thetable}{T\arabic{chapter}.\arabic{table}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% prima pagina
+\newpage
+\pagestyle{empty} % empty
+\mbox{}
+\clearpage
+
+\pagenumbering{roman}
+
+% seconda pagina
+\includepdf{title_page.pdf}
+\clearpage
+
+% terza pagina
+\newpage
+%\pagestyle{empty} % empty
+\mbox{}
+\clearpage
+
+% quarta pagina
+\centerline{\headingStyle\Large Abstract}
+\bigskip
+\noindent
+\input{contents/abstract.tex}
+\vfil
+{\centering
+  \begin{tabular}{rl}
+    Title:           & Anomalies in              \\
+                     & Quantum Mechanics         \\
+    Author:          & Alessio Martini           \\
+    Supervisor:      & Noppadol Mekareeya        \\
+    Study programme: & Physics                   \\
+    Institution:     & Department of Physics,    \\
+                     & Faculty of Science,       \\
+                     & Milano Bicocca University \\
+    Year:            & 2023                      \\
+    Pages:           & \pageref{LastPage}
+  \end{tabular}
+}
+\vfil
+\noindent
+\input{contents/legal_disclaimer.tex}
+\clearpage
+
+% quinta pagina
+
+\newpage
+%\pagestyle{empty} % empty
+\mbox{}
+\clearpage
+
+% sesta pagina
+
+\mbox{}
+\noindent
+\input{contents/acknowlwdgements.tex}
+\vfil
+\clearpage
+
+% settima pagina
+
+\pagestyle{fancy}
+
+
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+\markboth{\normalfont\sffamily\textsc{Preface}}{}
+
+\input{contents/preface.tex}
+
+\noindent
+\parbox{.4\textwidth}{
+  Milano
+  \\
+  November 2023
+}
+\hfill
+\parbox{.4\textwidth}{\flushright{}
+  Alessio Martini
+  \\
+  a.martini25@campus.unimib.it
+}
+
+\clearpage
+
+% ottava pagina
+\tableofcontents
+\markboth{\textsc{Contents}}{}
+\clearpage
+
+\newpage
+\pagestyle{empty} % empty
+\mbox{}
+\clearpage
+
+\pagestyle{fancy}
+\pagenumbering{arabic}
+
+%%% MAIN TEXT BEGINS %%%
+% it is better to have chapters in separate files and include them by \input
+
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+\markboth{\normalfont\sffamily\textsc{Introduction}}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% preamble
+\input{contents/introduction.tex}
+
+\clearpage
+
+\section*{Classifying symmetry breakings}
+\input{contents/symmetry_classification.tex}
+\cleardoublepage{}
+
+\chapter{Why the \texorpdfstring{$1/x^2$}{inverse squared} potential?} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The stationary Schrödinger's Equation}
+\label{section:generic_potentials}
+\input{contents/generic_potentials.tex}
+\clearpage
+
+\section{Peculiarities of the \texorpdfstring{$1/x^2$}{inverse squared} potential}
+\label{section:peculiarities}
+\input{contents/peculiarities_potential.tex}
+\cleardoublepage{}
+
+\chapter{The Method}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The Method of Self-Adjoint Extension}
+\label{section:self_adjoint}
+\input{contents/selfadjoint.tex}
+\cleardoublepage{}
+
+\chapter{Content}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The free particle on the half line}
+\label{section:free_halfaxis}
+\input{contents/free_particle_half_line.tex}
+\clearpage
+
+\section{The particle in the \texorpdfstring{$1/x^2$}{inverse squared} potential}
+\label{section:xsqared_halfaxis}
+\input{contents/particle_xsquared.tex}
+\clearpage
+
+\section{Conclusions}
+\label{section:conclusion}
+\input{contents/conclusion.tex}
+\cleardoublepage{}
+
+\chapter{Analogy from the literature} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The two-dimensional \texorpdfstring{$\delta$}{Delta}-potential}
+\label{section:delta_potential}
+\input{contents/delta_potential.tex}
+\cleardoublepage{}
+
+%%% REFERENCES %%%
+
+\defbibheading{bibliography}[\bibname]{
+  \chapter*{References}
+  \addcontentsline{toc}{chapter}{References}
+  \markboth{\textsc{References}}{}
+}
+
+\printbibheading{}
+\newrefcontext{myarticles}
+\printbibliography[heading=subbibliography,resetnumbers,category=MyArticles,title={Articles covering the presented results}]
+\newrefcontext{books}
+\printbibliography[heading=subbibliography,resetnumbers,type=book,title={Books}]
+\newrefcontext{nonbooks}
+\printbibliography[heading=subbibliography,resetnumbers,nottype=book,notcategory=MyArticles,title={Articles}]
+
+\newpage
+\pagestyle{empty}
+\mbox{}
+\clearpage
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
