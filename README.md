@@ -78,9 +78,9 @@ xelatex thesis.tex
 
 ## Related repositories
 
-- [`anomalies_qm_bsc_thesis_private`](https://github.com/alessiomartini/anomalies_qm_bsc_thesis_private)
+- [`bsc-thesis-scale-anomaly-archive`](https://github.com/alessiomartini/bsc-thesis-scale-anomaly-archive)
   — the full working archive: defence slides, draft history, figure notebooks and
   university paperwork.
-- [`gen-sym-in-gravity-msc-thesis`](https://github.com/alessiomartini/gen-sym-in-gravity-msc-thesis)
+- [`msc-thesis-non-invertible-symmetries`](https://github.com/alessiomartini/msc-thesis-non-invertible-symmetries)
   — the MSc thesis, which continues the same thread on anomalies into generalized
   and non-invertible symmetries.
